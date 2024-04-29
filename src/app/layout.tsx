@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import StyledComponentsRegistry from "../../lib/registry";
 import { ReactQueryClientProvider } from "../../providers/ReactQueryClientProvider";
 // import { Inter } from "next/font/google";
-// import "./globals.css";
+import "./reset.css";
+import { CartProvider } from "../../providers/CartProvider";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <ReactQueryClientProvider>
+      <CartProvider>
       <html lang="pt-br">
         <body>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </body>
       </html>
+      </CartProvider>
     </ReactQueryClientProvider>
   )
 }
