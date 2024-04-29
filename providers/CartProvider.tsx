@@ -1,23 +1,11 @@
 "use client"
-
+import { ICartItem } from '@/types/CartItem';
 import React, { createContext, useContext, useState, FC, useMemo, ReactNode } from 'react';
-
-// Interface para o tipo de item do carrinho
-interface CartItem {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  photo: string;
-  price: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 // Interface para o contexto do carrinho
 interface CartContextType {
-  cartItems: CartItem[];
-  addItemToCart: (item: CartItem) => void;
+  cartItems: ICartItem[];
+  addItemToCart: (item: ICartItem) => void;
   removeItemFromCart: (itemId: number) => void;
   clearCart: () => void;
   getNumItemsInCart: () => number;
@@ -37,10 +25,10 @@ export const useCart = (): CartContextType => {
 
 // Provider do carrinho
 export const CartProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
 
   // Função para adicionar item ao carrinho
-  const addItemToCart = (item: CartItem) => {
+  const addItemToCart = (item: ICartItem) => {
     setCartItems([...cartItems, item]);
   };
 
