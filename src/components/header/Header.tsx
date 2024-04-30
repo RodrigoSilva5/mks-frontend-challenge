@@ -1,21 +1,17 @@
-"use client"
+import React from 'react';
 import CartButton from "../CartButton/CartButton";
 import { HeaderContainer, Logo } from "./style";
-export default function Header() {
-    return (
-        <HeaderContainer>
-            <Logo>
-                <span>
-                    MKS
-                </span>
-                <span>
-                    Sistemas
-                </span>
-            </Logo>
+import { ToggleProps } from '@/types/Toogle';
 
-            <CartButton>
-                
-            </CartButton>
-        </HeaderContainer>
-    )
+export default function Header({ toggleDisplay }: ToggleProps) {
+  return (
+    <HeaderContainer>
+      <Logo>
+        <span>MKS</span>
+        <span>Sistemas</span>
+      </Logo>
+
+      <CartButton toggleDisplay={toggleDisplay} />
+    </HeaderContainer>
+  );
 }

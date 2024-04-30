@@ -7,8 +7,11 @@ interface CartContextType {
   cartItems: ICartItem[];
   addItemToCart: (item: ICartItem) => void;
   removeItemFromCart: (itemId: number) => void;
+  increaseItemQuantity: (itemId: number) => void;
+  decreaseItemQuantity: (itemId: number) => void;
   clearCart: () => void;
   getNumItemsInCart: () => number;
+  calculateTotalPrice: () => number;
 }
 
 // Contexto para armazenar o estado do carrinho
@@ -29,14 +32,47 @@ export const CartProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   // Função para adicionar item ao carrinho
   const addItemToCart = (item: ICartItem) => {
-    setCartItems([...cartItems, item]);
+    // Verificar se o item já está no carrinho
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+  
+    if (existingItem) {
+      // Se o item já existe, atualize a quantidade
+      const updatedCartItems = cartItems.map((cartItem) =>
+        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      // Se o item não existe, adicione-o ao carrinho
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const calculateTotalPrice = (): number => {
+    return cartItems.reduce((total, item) => {
+      const itemTotalPrice = parseFloat(item.price) * item.quantity;
+      return total + itemTotalPrice;
+    }, 0);
   };
 
   // Função para remover item do carrinho
   const removeItemFromCart = (itemId: number) => {
     setCartItems(cartItems.filter(item => item.id !== itemId));
   };
+    // Função para aumentar a quantidade de um item no carrinho
+    const increaseItemQuantity = (itemId: number) => {
+      const updatedCartItems = cartItems.map((item) =>
+        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCartItems(updatedCartItems);
+    };
 
+    // Função para diminuir a quantidade ou remover o item do carrinho
+    const decreaseItemQuantity = (itemId: number) => {
+      const updatedCartItems = cartItems.map((item) =>
+        item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
+      );
+      setCartItems(updatedCartItems);
+    };
   // Função para limpar o carrinho
   const clearCart = () => {
     setCartItems([]);
@@ -52,6 +88,9 @@ export const CartProvider: FC<{ children: ReactNode }> = ({ children }) => {
     cartItems,
     addItemToCart,
     removeItemFromCart,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    calculateTotalPrice,
     clearCart,
     getNumItemsInCart
   }), [cartItems]);
