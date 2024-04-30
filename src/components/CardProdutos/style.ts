@@ -32,6 +32,7 @@ export const NomeDoProduto = styled.h1`
     line-height: 19px;
     text-align: left;
     color: #2C2C2C;
+    min-width: 126px;
 `
 export const NomeSpanContainer = styled.div`display: flex;   `
 

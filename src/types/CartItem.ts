@@ -9,5 +9,6 @@ export interface ICartItem {
     price: string;
     createdAt: string;
     updatedAt: string;
+    quantity: number;
   }
   
