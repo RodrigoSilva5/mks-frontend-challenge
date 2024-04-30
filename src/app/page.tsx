@@ -1,4 +1,5 @@
 import CardProduto from "@/components/CardProdutos/CardProduto";
+import Footer from "@/components/Footer/Footer";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
 import SkeletonCard from "@/components/Skeleton/Skeleton";
 import Header from "@/components/header/Header";
@@ -18,7 +19,7 @@ export default function Page() {
     <>
       <Header />   
       <ProductGrid />
-        
+      <Footer />
     </>
 
   )
