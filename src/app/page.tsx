@@ -1,6 +1,7 @@
 import CardProduto from "@/components/CardProdutos/CardProduto";
+import ProductGrid from "@/components/ProductGrid/ProductGrid";
+import SkeletonCard from "@/components/Skeleton/Skeleton";
 import Header from "@/components/header/Header";
-
 const exampleItem = {
   id: 1,
   name: 'Headset Cloud Stinger',
@@ -15,10 +16,9 @@ const exampleItem = {
 export default function Page() {
   return (
     <>
-      <Header>
+      <Header />   
+      <ProductGrid />
         
-      </Header>
-      <CardProduto item={exampleItem}/>
     </>
 
   )

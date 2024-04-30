@@ -13,6 +13,7 @@ export const CardContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 15px;
 `
 export const InfoContainer = styled.div`
     margin-left: 14px;
