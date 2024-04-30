@@ -3,12 +3,14 @@
 import { ICartItem } from "@/types/CartItem";
 import { CardContainer, ImgContainer, NomeDoProduto, NomeSpanContainer, Preco, DescricaoContainer, InfoContainer, Button } from "./style";
 import { FiShoppingBag } from "react-icons/fi";
+import { useCart } from "../../../providers/CartProvider";
 
 interface ProductItemProps {
     item: ICartItem; 
   }
 
 export default function CardProduto({ item }: ProductItemProps) {
+    const {addItemToCart} = useCart()
     return(
         <CardContainer>
             <ImgContainer >
@@ -31,7 +33,7 @@ export default function CardProduto({ item }: ProductItemProps) {
                     </p>
                 </DescricaoContainer>
         </InfoContainer>
-            <Button>
+            <Button onClick={() => addItemToCart(item)}>
                 <FiShoppingBag />
                 COMPRAR
             </Button>      
